@@ -48,7 +48,6 @@ def show_skills():
                 print(f"uid => {i[2]}")
     else:
         print('kos omak')
-    co_close()
 def add_skill():
     sk=input("enter the skill u wish to add => ").strip().capitalize()
     cr.execute(f"SELECT name FROM SKILLS WHERE name= '{sk}' and userid={uid}")
@@ -57,10 +56,11 @@ def add_skill():
         print('this skill already exist to this user')
         choose=input("do u want to update it? y/n ").lower()
         if choose=='n':
-            pass
+            co_close()
         elif choose=='y':
             prog = input("enter ur new progress => ").strip()
             cr.execute(f"UPDATE SKILLS SET progress= '{prog}' WHERE name= '{sk}' and userid= '{uid}'")
+            co_close()
         else:
             print("kos omak")
     else:
@@ -73,19 +73,19 @@ def add_skill():
             add_skill()
         else:
             print("kos omak")
-        co_close()
 def delete_skill():
     skdel=input("choose the skill u want to delete: ").strip().capitalize()
     cr.execute(f"DELETE FROM SKILLS WHERE name='{skdel}'")
     print("column has been removed!")
     choose = input("do u wish to delete somthing again? y/n").strip().lower()
     if choose == 'n':
-        pass
+        co_close()
     elif choose == 'y':
         delete_skill()
     else:
         print("kos omak")
-    co_close()
+        co_close()
+
 
 def update_skill():
     the_change=input("enter name of the skill u want to update: ").strip().capitalize()
